@@ -3,6 +3,7 @@
 Plugin that synchronizes knockback as shown in the GIF image below.
 
 ![Demonstration](image/animation.gif)
+*On the left, this plugin was disabled. On the right, this plugin was enabled.*
 
 Refer to [this twitter post by Intel Edits](https://x.com/inteledits/status/1835536760904003650) for more information about how this tool works.
 

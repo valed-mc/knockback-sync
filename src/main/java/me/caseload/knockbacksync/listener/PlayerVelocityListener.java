@@ -1,7 +1,7 @@
 package me.caseload.knockbacksync.listener;
 
 import me.caseload.knockbacksync.KnockbackSync;
-import me.caseload.knockbacksync.manager.KnockbackManager;
+import me.caseload.knockbacksync.manager.HitManager;
 import me.caseload.knockbacksync.util.PlayerUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -28,15 +28,22 @@ public class PlayerVelocityListener implements Listener {
         if (damageCause != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
             return;
 
-        Entity attacker = ((EntityDamageByEntityEvent) entityDamageEvent).getDamager();
-        if (!(attacker instanceof Player))
+        Entity attackerEntity = ((EntityDamageByEntityEvent) entityDamageEvent).getDamager();
+        if (!(attackerEntity instanceof Player attacker))
             return;
 
         Vector knockback = victim.getVelocity();
         if (victim.isOnGround() || !PlayerUtil.predictiveOnGround(victim, knockback.getY()))
             return;
 
-        victim.setVelocity(KnockbackManager.getCorrectedKnockback(victim.getUniqueId(), knockback));
+        final int maxDamageAge = KnockbackSync.getInstance().getConfig().getInt("max_damage_age_milliseconds");
+        if (!HitManager.hasRecentHit(victim.getUniqueId(), maxDamageAge))
+            return;
+
+        final double modifiedYAxis = PlayerUtil.getModifiedYAxis(victim, attacker);
+        final Vector newVelocity = knockback.clone().setY(modifiedYAxis);
+
+        victim.setVelocity(newVelocity);
     }
 
 }

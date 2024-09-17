@@ -1,6 +1,8 @@
 enabled: true
 ping_offset: 0
+max_damage_age_milliseconds: 50
 
 enable_message: "&aSuccessfully enabled ValedKnockbackSync."
 disable_message: "&cSuccessfully disabled ValedKnockbackSync."
 configure_offset_message: "&aSuccessfully configured the ping offset."
+configure_max_damage_age_message: "&aSuccessfully configured the maximum damage age."

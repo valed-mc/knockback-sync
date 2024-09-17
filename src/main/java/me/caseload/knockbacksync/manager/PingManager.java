@@ -26,4 +26,10 @@ public class PingManager {
         PacketEvents.getAPI().getPlayerManager().sendPacket(player, packet);
         PingManager.getTimelineMap().put(player.getUniqueId(), System.currentTimeMillis());
     }
+
+    public static void cleanup(UUID uuid) {
+        pingMap.remove(uuid);
+        timelineMap.remove(uuid);
+    }
+
 }

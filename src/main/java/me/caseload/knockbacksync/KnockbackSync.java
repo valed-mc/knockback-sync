@@ -9,6 +9,8 @@ import me.caseload.knockbacksync.command.MainCommand;
 import me.caseload.knockbacksync.listener.PacketReceiveListener;
 import me.caseload.knockbacksync.listener.PlayerDamageListener;
 import me.caseload.knockbacksync.listener.PlayerVelocityListener;
+import me.caseload.knockbacksync.listener.QuitListener;
+import me.caseload.knockbacksync.runnable.PingRunnable;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,13 +33,17 @@ public final class KnockbackSync extends JavaPlugin {
 
         registerListeners(
                 new PlayerDamageListener(),
-                new PlayerVelocityListener()
+                new PlayerVelocityListener(),
+                new QuitListener()
         );
 
         PacketEvents.getAPI().getEventManager().registerListener(
-                new PacketReceiveListener(), PacketListenerPriority.NORMAL);
+                new PacketReceiveListener(), PacketListenerPriority.NORMAL
+        );
 
         PacketEvents.getAPI().init();
+
+        new PingRunnable().runTaskTimer(this, 15, 15);
     }
 
     @Override
@@ -55,4 +61,5 @@ public final class KnockbackSync extends JavaPlugin {
         for (Listener listener : listeners)
             pluginManager.registerEvents(listener, this);
     }
+
 }

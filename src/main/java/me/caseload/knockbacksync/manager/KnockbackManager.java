@@ -16,4 +16,9 @@ public class KnockbackManager {
     public static Vector getCorrectedKnockback(UUID uuid, Vector originalKnockback) {
         return originalKnockback.clone().setY(knockbackMap.get(uuid));
     }
+
+    public static void cleanup(UUID uuid) {
+        knockbackMap.remove(uuid);
+    }
+
 }

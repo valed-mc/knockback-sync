@@ -14,9 +14,9 @@ import org.bukkit.util.Vector;
 
 public class PlayerVelocityListener implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerVelocity(PlayerVelocityEvent event) {
-        if (!KnockbackSync.getInstance().getConfig().getBoolean("enabled") || event.isCancelled())
+        if (!KnockbackSync.getInstance().getConfig().getBoolean("enabled"))
             return;
 
         Player victim = event.getPlayer();
@@ -38,4 +38,5 @@ public class PlayerVelocityListener implements Listener {
 
         victim.setVelocity(KnockbackManager.getCorrectedKnockback(victim.getUniqueId(), knockback));
     }
+
 }

@@ -41,4 +41,5 @@ public class MathUtil {
     public static double getMaxHeight(double targetVerticalVelocity) {
         return targetVerticalVelocity * 2.484875;
     }
+
 }

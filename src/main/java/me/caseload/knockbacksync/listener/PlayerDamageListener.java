@@ -11,16 +11,15 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class PlayerDamageListener implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
-        if (!KnockbackSync.getInstance().getConfig().getBoolean("enabled") || event.isCancelled() || !(event.getEntity() instanceof Player) || !(event.getDamager() instanceof Player))
+        if (!KnockbackSync.getInstance().getConfig().getBoolean("enabled") || !(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Player attacker))
             return;
-
-        Player victim = (Player) event.getEntity();
-        Player attacker = (Player) event.getDamager();
 
         Double modifiedYAxis = PlayerUtil.getModifiedYAxis(victim, attacker);
         KnockbackManager.getKnockbackMap().put(victim.getUniqueId(), modifiedYAxis);
-        PingManager.sendPacket(victim);
+
+        // PingManager.sendPacket(victim);
     }
+
 }

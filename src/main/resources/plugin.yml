@@ -1,6 +1,6 @@
-name: KnockbackSync
+name: ValedKnockbackSync
 version: '1.2'
 main: me.caseload.knockbacksync.KnockbackSync
 api-version: '1.18'
-authors: [ Caseload ]
-description: Synchronizes player knockback for smoother gameplay.
+authors: [ Caseload, Valed Development Team ]
+description: Developed by Valed Development Team, a fork of the knockback-sync plugin by CASELOAD7000.

@@ -4,6 +4,7 @@ import dev.jorel.commandapi.CommandAPICommand;
 import me.caseload.knockbacksync.command.subcommand.OffsetSubcommand;
 import me.caseload.knockbacksync.command.subcommand.PingSubcommand;
 import me.caseload.knockbacksync.command.subcommand.ToggleSubcommand;
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 
 public class MainCommand {
@@ -15,7 +16,11 @@ public class MainCommand {
                 .withSubcommand(new ToggleSubcommand().getCommand())
                 .withSubcommand(new OffsetSubcommand().getCommand())
                 .executes((sender, args) -> {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6This server is running the &eKnockbackSync &6Plugin. &bhttps://github.com/CASELOAD7000/knockback-sync"));
+                    sender.sendMessage(
+                            ChatColor.translateAlternateColorCodes(
+                                    '&',
+                                    "&eThis server is running the &6&lValedKnockbackSync &ePlugin by the &6&lValed Development Team&e. &fhttps://github.com/valed-mc/knockback-sync\n&eA fork of &6&lKnockbackSync &eby &6&lCASELOAD7000&e."
+                            ));
                 })
                 .register();
     }

@@ -17,8 +17,8 @@ public class ToggleSubcommand {
 
                     String message = ChatColor.translateAlternateColorCodes('&',
                             toggledState ?
-                                    KnockbackSync.getInstance().getConfig().getString("enable_message", "&aSuccessfully enabled KnockbackSync.") :
-                                    KnockbackSync.getInstance().getConfig().getString("disable_message", "&cSuccessfully disabled KnockbackSync.")
+                                    KnockbackSync.getInstance().getConfig().getString("enable_message", "&aSuccessfully enabled ValedKnockbackSync.") :
+                                    KnockbackSync.getInstance().getConfig().getString("disable_message", "&cSuccessfully disabled ValedKnockbackSync.")
                     );
 
                     sender.sendMessage(message);

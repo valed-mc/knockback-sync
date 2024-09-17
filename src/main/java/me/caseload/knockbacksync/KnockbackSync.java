@@ -43,7 +43,7 @@ public final class KnockbackSync extends JavaPlugin {
 
         PacketEvents.getAPI().init();
 
-        new PingRunnable().runTaskTimer(this, 15, 15);
+        new PingRunnable().runTaskTimerAsynchronously(this, 15, 15);
     }
 
     @Override

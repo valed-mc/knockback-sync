@@ -1,7 +1,7 @@
 package me.caseload.knockbacksync.listener;
 
 import me.caseload.knockbacksync.KnockbackSync;
-import me.caseload.knockbacksync.manager.HitManager;
+import me.caseload.knockbacksync.manager.KnockbackManager;
 import me.caseload.knockbacksync.manager.PingManager;
 import me.caseload.knockbacksync.util.MathUtil;
 import me.caseload.knockbacksync.util.PlayerUtil;
@@ -13,6 +13,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.util.Vector;
+
+import java.util.Optional;
+import java.util.UUID;
 
 public class PlayerVelocityListener implements Listener {
 
@@ -31,28 +34,25 @@ public class PlayerVelocityListener implements Listener {
             return;
 
         Entity attackerEntity = ((EntityDamageByEntityEvent) entityDamageEvent).getDamager();
-        if (!(attackerEntity instanceof Player attacker))
-            return;
-
-        if (victim.isOnGround())
+        if (!(attackerEntity instanceof Player))
             return;
 
         final int maxDamageAge = KnockbackSync.getInstance().getConfig().getInt("max_damage_age_milliseconds");
-        if (!HitManager.hasRecentHit(victim.getUniqueId(), maxDamageAge))
+        final Optional<Double> modifiedYAxis = KnockbackManager.modifiedYAxis(victim.getUniqueId(), maxDamageAge);
+        if (modifiedYAxis.isEmpty())
             return;
 
         final Vector knockback = victim.getVelocity();
 
         if (PlayerUtil.predictiveOnGround(victim, knockback.getY())) {
-            handleOnGround(victim, knockback, attacker);
+            handleOnGround(victim, knockback, modifiedYAxis.get());
         } else if (KnockbackSync.getInstance().getConfig().getBoolean("toggle_offground")) {
             long ping = PingManager.getPingMap().getOrDefault(victim.getUniqueId(), (long) victim.getPing());
             handleOffGround(victim, knockback, (int) ping);
         }
     }
 
-    private void handleOnGround(Player victim, Vector knockback, Player attacker) {
-        final double modifiedYAxis = PlayerUtil.getModifiedYAxis(victim, attacker);
+    private void handleOnGround(Player victim, Vector knockback, double modifiedYAxis) {
         final Vector newVelocity = knockback.clone().setY(modifiedYAxis);
 
         victim.setVelocity(newVelocity);

@@ -1,6 +1,6 @@
 package me.caseload.knockbacksync.listener;
 
-import me.caseload.knockbacksync.manager.HitManager;
+import me.caseload.knockbacksync.manager.KnockbackManager;
 import me.caseload.knockbacksync.manager.PingManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +15,7 @@ public class QuitListener implements Listener {
         final UUID uuid = event.getPlayer().getUniqueId();
 
         PingManager.cleanup(uuid);
-        HitManager.cleanup(uuid);
+        KnockbackManager.cleanup(uuid);
     }
 
 }

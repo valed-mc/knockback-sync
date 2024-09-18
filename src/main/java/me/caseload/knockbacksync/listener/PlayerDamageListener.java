@@ -1,7 +1,8 @@
 package me.caseload.knockbacksync.listener;
 
 import me.caseload.knockbacksync.KnockbackSync;
-import me.caseload.knockbacksync.manager.HitManager;
+import me.caseload.knockbacksync.manager.KnockbackManager;
+import me.caseload.knockbacksync.util.PlayerUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,10 +12,11 @@ public class PlayerDamageListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
-        if (!KnockbackSync.getInstance().getConfig().getBoolean("enabled") || !(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Player))
+        if (!KnockbackSync.getInstance().getConfig().getBoolean("enabled") || !(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Player attacker))
             return;
 
-        HitManager.giveHit(victim.getUniqueId());
+        final double modifiedYAxis = PlayerUtil.getModifiedYAxis(victim, attacker);
+        KnockbackManager.giveHit(victim.getUniqueId(), modifiedYAxis);
     }
 
 }

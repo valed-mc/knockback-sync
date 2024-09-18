@@ -1,10 +1,7 @@
 package me.caseload.knockbacksync.command;
 
 import dev.jorel.commandapi.CommandAPICommand;
-import me.caseload.knockbacksync.command.subcommand.MaxDamageAgeSubcommand;
-import me.caseload.knockbacksync.command.subcommand.OffsetSubcommand;
-import me.caseload.knockbacksync.command.subcommand.PingSubcommand;
-import me.caseload.knockbacksync.command.subcommand.ToggleSubcommand;
+import me.caseload.knockbacksync.command.subcommand.*;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 
@@ -15,6 +12,7 @@ public class MainCommand {
                 .withAliases("kbsync")
                 .withSubcommand(new PingSubcommand().getCommand())
                 .withSubcommand(new ToggleSubcommand().getCommand())
+                .withSubcommand(new ToggleOffGroundSubcommand().getCommand())
                 .withSubcommand(new OffsetSubcommand().getCommand())
                 .withSubcommand(new MaxDamageAgeSubcommand().getCommand())
                 .executes((sender, args) -> {

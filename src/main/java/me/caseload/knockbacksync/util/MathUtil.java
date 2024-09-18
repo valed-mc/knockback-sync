@@ -42,4 +42,17 @@ public class MathUtil {
         return targetVerticalVelocity * 2.484875;
     }
 
+    public static double getRealVerticalVelocity(double verticalVelocity, double ping) {
+        final double gravity = 0.08;
+        final double multiplier = 0.98;
+
+        int ticks = (int) Math.ceil(ping/50);
+        while(ticks > 0) {
+            verticalVelocity -= gravity;
+            verticalVelocity *= multiplier;
+            ticks--;
+        }
+        return verticalVelocity;
+    }
+
 }

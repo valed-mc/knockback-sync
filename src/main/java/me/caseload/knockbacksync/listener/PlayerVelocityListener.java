@@ -45,7 +45,7 @@ public class PlayerVelocityListener implements Listener {
 
         if (PlayerUtil.predictiveOnGround(victim, knockback.getY())) {
             handleOnGround(victim, knockback, attacker);
-        } else if (KnockbackSync.getInstance().getConfig().getBoolean("toggle_experimental_offground")) {
+        } else if (KnockbackSync.getInstance().getConfig().getBoolean("toggle_offground")) {
             long ping = PingManager.getPingMap().getOrDefault(victim.getUniqueId(), (long) victim.getPing());
             handleOffGround(victim, knockback, (int) ping);
         }

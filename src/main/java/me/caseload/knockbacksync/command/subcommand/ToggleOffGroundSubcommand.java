@@ -10,15 +10,15 @@ public class ToggleOffGroundSubcommand {
         return new CommandAPICommand("toggleoffground")
                 .withPermission("knockbacksync.toggleoffground")
                 .executes((sender, args) -> {
-                    boolean toggledState = !KnockbackSync.getInstance().getConfig().getBoolean("toggle_experimental_offground");
+                    boolean toggledState = !KnockbackSync.getInstance().getConfig().getBoolean("toggle_offground");
 
-                    KnockbackSync.getInstance().getConfig().set("toggle_experimental_offground", toggledState);
+                    KnockbackSync.getInstance().getConfig().set("toggle_offground", toggledState);
                     KnockbackSync.getInstance().saveConfig();
 
                     String message = ChatColor.translateAlternateColorCodes('&',
                             toggledState ?
-                                    KnockbackSync.getInstance().getConfig().getString("enable_message", "&aSuccessfully enabled ValedKnockbackSync offground experiment.") :
-                                    KnockbackSync.getInstance().getConfig().getString("disable_message", "&cSuccessfully disabled ValedKnockbackSync offground experiment.")
+                                    KnockbackSync.getInstance().getConfig().getString("offground_enable_message", "&aSuccessfully enabled ValedKnockbackSync offground.") :
+                                    KnockbackSync.getInstance().getConfig().getString("offground_disable_message", "&cSuccessfully disabled ValedKnockbackSync offground.")
                     );
 
                     sender.sendMessage(message);

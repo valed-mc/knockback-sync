@@ -1,7 +1,7 @@
 enabled: true
 toggle_offground: true
 ping_offset: 25
-max_damage_age_milliseconds: 50
+max_damage_age_milliseconds: 500
 
 enable_message: "&aSuccessfully enabled ValedKnockbackSync."
 offground_enable_message: "&aSuccessfully enabled ValedKnockbackSync offground."

@@ -21,7 +21,7 @@ public class MainCommand {
                     sender.sendMessage(
                             ChatColor.translateAlternateColorCodes(
                                     '&',
-                                    "&eThis server is running the &6&lValedKnockbackSync &ePlugin by the &6&lValed Development Team&e. &fhttps://github.com/valed-mc/knockback-sync\n&eA fork of &6&lKnockbackSync &eby &6&lCASELOAD7000&e."
+                                    "&eThis server is running &6ValedKnockbackSync&e.\n&eA fork of &6KnockbackSync &eby &6CASELOAD7000&e,\n&emade by the &6Valed Development Team&e.\n\n&fhttps://github.com/valed-mc/knockback-sync"
                             ));
                 })
                 .register();
